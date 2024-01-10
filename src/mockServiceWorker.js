@@ -282,6 +282,5 @@ async function respondWithMock(response) {
     value: true,
     enumerable: true,
   })
-console.log("Mock Response",mockedResponse)
   return mockedResponse
 }
