@@ -8,7 +8,6 @@ import { ModelColorService } from '../model-color.service';
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
-  // providers: [ModelColorService]
 })
 export class NavComponent implements OnInit {
   linkEnabledStep2:boolean = false;
