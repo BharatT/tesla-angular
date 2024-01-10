@@ -3,7 +3,7 @@ import { ModelColorService } from '../model-color.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Color, Model } from '../model.interface';
+import { Color, Model ,Option} from '../model.interface';
 
 @Component({
   selector: 'app-step1',
@@ -17,12 +17,12 @@ export class Step1Component implements OnInit {
   modelsList!: Model[];
   colorsList!: Color[];
   imageUrl:string="";
-  selectedModel: any = 'Choose...';
-  selectedColor: any;
-  imageModel: any;
-  imageName: any;
-  storeSelectedResponseModel!: any[];
-  storeSelectedResponseColor!: any[];
+  selectedModel: string = 'Choose...';
+  selectedColor!: string;
+  imageModel!: string;
+  imageName!: string;
+  storeSelectedResponseModel!: Model;
+  storeSelectedResponseColor!: Color[];
   constructor(private modelColorService: ModelColorService) {}
 
   ngOnInit(): void {
@@ -38,16 +38,16 @@ export class Step1Component implements OnInit {
   onModuleSelect(){
     console.log("selectedModel", this.selectedModel);
     let modelID = this.selectedModel;
-    let selectedResponseObject = this.modelsList.filter(data => {
+    let selectedResponseObject:Model = this.modelsList.filter(data => {
       return data.code === modelID
-    })
+    })[0]
     this.storeSelectedResponseModel = selectedResponseObject;
-    this.selectedColor = selectedResponseObject[0].colors[0].description;
+    this.selectedColor = selectedResponseObject.colors[0].description;
     console.log(" this.selectedColor : ",  selectedResponseObject, "Color :", this.selectedColor)
-    this.colorsList = selectedResponseObject[0].colors; 
+    this.colorsList = selectedResponseObject.colors; 
     console.log("Color List : ", this.colorsList);
-    this.imageModel = selectedResponseObject[0].code;
-    this.imageName = selectedResponseObject[0].colors[0].code;
+    this.imageModel = selectedResponseObject.code;
+    this.imageName = selectedResponseObject.colors[0].code;
     this.imageUrl=`./assets/images/${this.imageModel}/${this.imageName}.jpg`;
     this.modelColorService.setImage(this.imageUrl);
     this.modelColorService.sendNotificationStep2(true);
@@ -55,7 +55,7 @@ export class Step1Component implements OnInit {
     console.log("this.imageUrl :", this.imageUrl)
     
   }
-  onModelColorSelect(model:any, color:any) {
+  onModelColorSelect(model:Model, color:Color) {
     this.modelColorService.setSelectedModelAndColor(model,color);
     }
   onColorSelect(){
@@ -69,7 +69,7 @@ export class Step1Component implements OnInit {
     this.imageUrl=`./assets/images/${this.imageModel}/${this.imageName}.jpg`;
     console.log("Image Clolor :", this.imageUrl);
     this.modelColorService.setImage(this.imageUrl);
-    this.modelColorService.setData('sharedKey', this.imageUrl);
+    // this.modelColorService.setData('sharedKey', this.imageUrl);
     this.selectedColor = this.selectedColor;
     this.onModelColorSelect(this.storeSelectedResponseModel , this.storeSelectedResponseColor[0]);
     this.modelColorService.sendNotificationStep2(true);
