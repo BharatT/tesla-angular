@@ -2,11 +2,11 @@
  <div>
     <label for="configSelect">Config:</label>
     <select id="configSelect" [(ngModel)]="selectedConfig" (change)="onSelectConfig()">
-        <option value="Choose..." disabled selected>Choose...</option>
+      <option value=undefined selected>Choose...</option>
       <option *ngFor="let config of configs" [ngValue]="config">{{ config.description }}</option>
     </select>
   </div>
-  <p *ngIf="selectedConfig !=='Choose...'">
+  <p *ngIf="selectedConfig">
     Range: {{ selectedConfig.range }} miles- Max Speed: {{ selectedConfig.speed}} mph- Cost: {{ selectedConfig.price | currency}}
   </p>
   <div>

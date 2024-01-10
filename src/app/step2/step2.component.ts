@@ -1,46 +1,46 @@
-import { Component } from '@angular/core';
-import { ModelColorService } from '../model-color.service';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ModelColorService } from '../model-color.service';
+import { Color, Config, ConfigDetails, Model } from '../model.interface';
 @Component({
   selector: 'app-step2',
   standalone: true,
   imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './step2.component.html',
-  styleUrl: './step2.component.scss',
-  // providers: [ModelColorService]
+  styleUrl: './step2.component.scss'
 })
+
 export class Step2Component {
-  models: any[] = [];
+  models: Model[] = [];
   selectedModel: string = '';
-  configs: any[] = [];
-  selectedConfig: any = 'Choose...';;
+  configs!: Config[];
+  selectedConfig!: Config;
+  modelColor!: { selectedModel: Model; selectedColor: Color; };
   includeYoke: boolean = false;
   includeTow: boolean = false;
-  
+
   constructor(private modelColorService: ModelColorService) { }
 
   ngOnInit(): void {
-    // this.modelColorService.getModels().subscribe((data: any) => {
-    //   this.models = data.models;
-    // });
-    this.fetchOptions('S')
+    this.modelColor = this.modelColorService.getSelectedModelAndColor();
+    let codeModel = this.modelColor.selectedModel.code;
+    this.fetchOptions(codeModel);
   }
   fetchOptions(id: string): void {
     this.modelColorService.fetchOptions(id).subscribe((response) => {
-      console.log('Options Response:', response);
       this.configs = response.configs;
-      this.includeYoke = response.yoke;
-      this.includeTow = response.towHitch;
+      this.includeYoke = response.yoke ?? false;
+      this.includeTow = response.towHitch ?? false;
     });
   }
 
   onSelectConfig(): void {
-    let requiredSelectedConfig = {...this.selectedConfig, isYoke:(this.includeYoke), towHitch:(this.includeTow)}
-    this.modelColorService.setConfig(requiredSelectedConfig);
-    this.modelColorService.sendNotificationStep3(true);
-    console.log(" Select Config : ", requiredSelectedConfig);
+    if (this.selectedConfig) {
+      let requiredSelectedConfig: ConfigDetails = { ...this.selectedConfig as Config, isYoke: (this.includeYoke), towHitch: (this.includeTow) }
+      this.modelColorService.setConfig(requiredSelectedConfig);
+      this.modelColorService.sendNotificationStep3(true);
+    }
   }
 }

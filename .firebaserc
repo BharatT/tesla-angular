@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tesla-angular-project": {
+      "hosting": {
+        "tesla-configurator": [
+          "tesla-angular-project"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tesla-angular-project"
+  }
+}

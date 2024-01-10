@@ -95,6 +95,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "tesla-configurator:build:production",
+              "serveTarget": "tesla-configurator:serve:production"
+            },
+            "development": {
+              "buildTarget": "tesla-configurator:build:development",
+              "serveTarget": "tesla-configurator:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

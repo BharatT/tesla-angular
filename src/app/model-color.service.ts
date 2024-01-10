@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Model } from './model.interface';
+import { Color, Config, ConfigDetails, Model, Option } from './model.interface';
 
 @Injectable()
 export class ModelColorService {
@@ -9,11 +9,11 @@ export class ModelColorService {
 
   modelApiUrl = '/models';
   optionApiUrl = '/options/';
-  selectedModel!: any[];
-  selectedColor!: any[];
+  selectedModel!: Model;
+  selectedColor!: Color;
   activeStep2!: boolean;
   activeStep3!: boolean;
-  selectConfig!: {};
+  selectConfig!:ConfigDetails;
   imagePath = new BehaviorSubject<string>("");
   notificationStep2Subject = new BehaviorSubject<boolean>(false);
   notificationStep3Subject = new BehaviorSubject<boolean>(false);
@@ -39,14 +39,14 @@ export class ModelColorService {
   getModelsAndColors(): Observable<Model[]> {
     return this.http.get<Model[]>(this.modelApiUrl);
   }
-  fetchOptions(id: string): Observable<any> {
+  fetchOptions(id: string): Observable<Option> {
     const url = `${this.optionApiUrl}${id}`;
-    return this.http.get(url);
+    return this.http.get<Option>(url);
   }
   isModelAndColorSelected(): boolean {
     return !!this.selectedModel && !!this.selectedColor;
   }
-  setSelectedModelAndColor(selectedModel: any[], selectedColor: any[]) {
+  setSelectedModelAndColor(selectedModel: Model, selectedColor: Color) {
     this.selectedModel = selectedModel;
     this.selectedColor = selectedColor;
   }
@@ -56,28 +56,10 @@ export class ModelColorService {
       selectedColor: this.selectedColor
     }
   }
-  // setActiveStep2Link(){
-  //      this.activeStep2 = (this.selectedModel && this.selectedColor) ? true: false;
-  // }
-  // getActiveStep2Link():boolean{
-  //   return this.activeStep2;
-  // }
+  
 
-  setData(key: string, data: any): void {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  // Get data from localStorage
-  getData(key: string): any {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
-  }
-
-  private dataSubject = new BehaviorSubject<string>('Initial Value');
-  public data$ = this.dataSubject.asObservable();
-
-
-  setConfig(selectedConfig: {}) {
+//  for setp 3 component purpose
+  setConfig(selectedConfig:ConfigDetails) {
     this.selectConfig = selectedConfig;
   }
   getConfig() {
