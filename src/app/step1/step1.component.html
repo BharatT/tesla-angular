@@ -1,0 +1,19 @@
+<h2>Step 1 : Choose your Model and color </h2>
+<div>
+    <label for="modelSelect">Select Model:</label>
+    <select id="modelSelect" [(ngModel)]="selectedModel" (change)="onModuleSelect()">
+      <option value="Choose..." disabled selected>Choose...</option>
+      <option *ngFor="let model of modelsList" [value]="model.code">{{ model.description}}</option>
+    </select>
+     
+  <div *ngIf="selectedModel !== 'Choose...'">
+    <label for="colorSelect">Select Color:</label>
+    <select id="colorSelect" [(ngModel)]="selectedColor" (change)="onColorSelect()">
+            <option *ngFor="let color of colorsList" [value]="color.description" [selected]="selectedColor">{{ color.description}}</option>
+            
+          </select>
+    
+  </div>
+   
+  </div>
+  

@@ -1,0 +1,22 @@
+<h2>step3 : Summary </h2>
+<h4> Your Your Tesla {{modelName}} </h4>
+<div class="summaryTable">
+    <tr>
+        <td>{{modelColorCar}}</td> <td> {{modelPrice | currency}}</td>
+    </tr>
+    <tr>
+        <td>Range {{configRange}} miles - Max speed: {{configSpeed}}</td> <td> </td>
+    </tr>
+    <tr>
+     <td>{{modelColorCar}} </td> <td>{{modelColorPrice}} </td>
+    </tr>
+    <tr *ngIf="isTowHitch">
+     <td>Tow Hitch Package  </td> <td>{{1000 | currency}} </td>
+    </tr>
+    <tr *ngIf="isYoke">
+     <td>Yoke steering wheel Package  </td> <td>{{1000 | currency}} </td>
+    </tr>
+    <tr>
+     <td>{{"Total Cost " | uppercase}} </td> <td>{{totalCost | currency}}</td>
+    </tr>
+</div>

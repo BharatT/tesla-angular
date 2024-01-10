@@ -1,0 +1,14 @@
+.summaryTable{
+    width: 600px;
+}
+.summaryTable tr{
+    
+    width: 600px;
+}
+.summaryTable tr td{
+    width: 300px;
+}
+.summaryTable tr:last-child td {
+    border-top: 1px solid #736565;
+    border-bottom: 1px solid #736565;
+}
