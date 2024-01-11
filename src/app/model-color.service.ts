@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Color, Config, ConfigDetails, Model, Option } from './model.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Color, ConfigDetails, Model, Option } from './model.interface';
 
 @Injectable()
 export class ModelColorService {
-  
-
   modelApiUrl = '/models';
   optionApiUrl = '/options/';
   selectedModel!: Model;

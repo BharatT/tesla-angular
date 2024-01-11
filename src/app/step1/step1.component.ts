@@ -26,6 +26,8 @@ export class Step1Component implements OnInit {
 
   ngOnInit(): void {
     this.fetchModels();
+    this.modelColorService.sendNotificationStep3(false);
+    this.modelColorService.sendNotificationStep2(false);
   }
 
   fetchModels(): void {

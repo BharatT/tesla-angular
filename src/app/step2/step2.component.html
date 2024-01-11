@@ -9,15 +9,15 @@
   <p *ngIf="selectedConfig">
     Range: {{ selectedConfig.range }} miles- Max Speed: {{ selectedConfig.speed}} mph- Cost: {{ selectedConfig.price | currency}}
   </p>
+
   <div>
     <label for="includeTow">Two hitch?</label>
-    <input type="checkbox" id="includeTow" [(ngModel)]="includeTow">
+    <input type="checkbox" id="includeTow" [(ngModel)]="includeTow" (change)="onCheckboxChange('includeTow')">
   </div>
   <div>
     <label for="includeYoke">Yoke steering wheel?</label>
-    <input type="checkbox" id="includeYoke" [(ngModel)]="includeYoke">
+    <input type="checkbox" id="includeYoke" [(ngModel)]="includeYoke" (change)="onCheckboxChange('includeYoke')">
   </div>
-  
   
   
   

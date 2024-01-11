@@ -10,16 +10,15 @@ import { ModelColorService } from '../model-color.service';
   styleUrl: './image.component.scss',
 })
 export class ImageComponent implements OnInit {
-  
-  constructor(private modelColorService: ModelColorService) {}
 
-imagePath!:string;
-@Input('imageUrl') imageUrl!:string ;
-ngOnInit(): void {
-  this.modelColorService.getImage().subscribe(data=>{
-    this.imagePath = data;
-  });
+  constructor(private modelColorService: ModelColorService) { }
+  imagePath!: string;
+  @Input('imageUrl') imageUrl!: string;
   
- }
+  ngOnInit(): void {
+    this.modelColorService.getImage().subscribe(data => {
+      this.imagePath = data;
+    });
+  }
 
 }

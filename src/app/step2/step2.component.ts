@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ModelColorService } from '../model-color.service';
-import { Color, Config, ConfigDetails, Model } from '../model.interface';
+import { Color, Config, ConfigDetails, Model, CheckboxOptions } from '../model.interface';
 @Component({
   selector: 'app-step2',
   standalone: true,
@@ -27,6 +27,7 @@ export class Step2Component {
     this.modelColor = this.modelColorService.getSelectedModelAndColor();
     let codeModel = this.modelColor.selectedModel.code;
     this.fetchOptions(codeModel);
+    this.modelColorService.sendNotificationStep3(false);
   }
   fetchOptions(id: string): void {
     this.modelColorService.fetchOptions(id).subscribe((response) => {
@@ -42,5 +43,14 @@ export class Step2Component {
       this.modelColorService.setConfig(requiredSelectedConfig);
       this.modelColorService.sendNotificationStep3(true);
     }
+  }
+
+  onCheckboxChange(option: keyof CheckboxOptions) {
+    let requiredSelectedConfig: ConfigDetails = {
+      ...this.selectedConfig as Config,
+      isYoke: this.includeYoke,
+      towHitch: this.includeTow
+    };
+    this.modelColorService.setConfig(requiredSelectedConfig);
   }
 }
