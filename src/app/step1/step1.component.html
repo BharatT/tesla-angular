@@ -9,7 +9,7 @@
   <div *ngIf="selectedModel !== 'Choose...'">
     <label for="colorSelect">Select Color:</label>
     <select id="colorSelect" [(ngModel)]="selectedColor" (change)="onColorSelect()">
-            <option *ngFor="let color of colorsList" [value]="color.description" [selected]="selectedColor">{{ color.description}}</option>
+            <option *ngFor="let color of colorsList" [value]="color.description">{{ color.description}}</option>
             
           </select>
     
