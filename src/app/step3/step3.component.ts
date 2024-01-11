@@ -37,7 +37,7 @@ export class Step3Component implements OnInit {
       this.configRange = this.configData.range;
       this.configSpeed = this.configData.speed;
       this.isTowHitch = this.modelOption.towHitch??false;
-      this.isYoke = this.modelOption.towHitch??false;
+      this.isYoke = this.modelOption.isYoke??false;
       this.totalCost = +(this.modelPrice + this.modelColorPrice + this.modelColorPrice + +(this.isTowHitch?1000:0) + +(this.isYoke?1000:0));
     } 
   }

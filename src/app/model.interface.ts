@@ -34,3 +34,8 @@ export interface ModelColor{
     selectedModel: Model;
   selectedColor: Color;
 }
+
+export interface CheckboxOptions {
+    includeTow: boolean;
+    includeYoke: boolean;
+  }
