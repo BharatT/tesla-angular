@@ -9,7 +9,6 @@ import { NavComponent } from "./nav/nav.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [ModelColorService],
   templateUrl: './app.component.html',
   imports: [AsyncPipe, JsonPipe, RouterOutlet, CommonModule, HttpClientModule, FormsModule, RouterLink, RouterLinkActive, ImageComponent, NavComponent]
 })

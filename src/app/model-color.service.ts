@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Color, ConfigDetails, Model, Option } from './model.interface';
 
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 export class ModelColorService {
   modelApiUrl = '/models';
   optionApiUrl = '/options/';
