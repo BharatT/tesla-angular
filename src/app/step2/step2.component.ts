@@ -20,6 +20,8 @@ export class Step2Component {
   modelColor!: { selectedModel: Model; selectedColor: Color; };
   includeYoke: boolean = false;
   includeTow: boolean = false;
+  selectedIncludeYoke: boolean = false;
+  selectedIncludeTow: boolean = false;
 
   constructor(private modelColorService: ModelColorService) { }
 
@@ -39,17 +41,17 @@ export class Step2Component {
 
   onSelectConfig(): void {
     if (this.selectedConfig) {
-      let requiredSelectedConfig: ConfigDetails = { ...this.selectedConfig as Config, isYoke: (this.includeYoke), towHitch: (this.includeTow) }
+      let requiredSelectedConfig: ConfigDetails = { ...this.selectedConfig as Config, isYoke: (this.selectedIncludeYoke), towHitch: (this.selectedIncludeTow) }
       this.modelColorService.setConfig(requiredSelectedConfig);
       this.modelColorService.sendNotificationStep3(true);
     }
   }
 
-  onCheckboxChange(option: keyof CheckboxOptions) {
+  onCheckboxChange(option:boolean) {
     let requiredSelectedConfig: ConfigDetails = {
       ...this.selectedConfig as Config,
-      isYoke: this.includeYoke,
-      towHitch: this.includeTow
+      isYoke: this.selectedIncludeYoke,
+      towHitch: this.selectedIncludeTow
     };
     this.modelColorService.setConfig(requiredSelectedConfig);
   }

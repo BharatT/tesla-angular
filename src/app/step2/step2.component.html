@@ -14,12 +14,12 @@
 @if(includeTow){
 <div>
   <label for="includeTow">Two hitch?</label>
-  <input type="checkbox" id="includeTow" [(ngModel)]="includeTow" (change)="onCheckboxChange('includeTow')">
+  <input type="checkbox" id="includeTow" [(ngModel)]="selectedIncludeTow" (change)="onCheckboxChange(selectedIncludeTow)">
 </div>
 }
 @if(includeYoke){
 <div>
   <label for="includeYoke">Yoke steering wheel?</label>
-  <input type="checkbox" id="includeYoke" [(ngModel)]="includeYoke" (change)="onCheckboxChange('includeYoke')">
+  <input type="checkbox" id="includeYoke" [(ngModel)]="selectedIncludeYoke" (change)="onCheckboxChange(selectedIncludeYoke)">
 </div>
 }
